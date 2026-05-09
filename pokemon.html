@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+</head>
+<body>
+    <h1> Pokemon </h1>
+    <fieldset>
+        <form>
+            <h3><br>Create a name for your pokemon.</h3>
+            <label id="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="It's name is..." required>
+        </form>
+
+        <form>
+            <h3><br>What type is it?</h3>
+            <label id="type">Type:</label>
+            <input type="text" id="type" name="type" placeholder="It's Type is..." required>
+        </form>
+
+        <form>
+            <h3><br>How many attack points?</h3>
+            <label id="attack">Attack points:</label>
+            <input type="number" id="attack" name="attack" min="0" placeholder="Attack points..." required>
+        </form>
+
+        <form>
+            <button type="button" id="submit">Submit to webhook</button>
+        </form>
+    </fieldset>
+
+    <script>
+
+        document.getElementById('submit').addEventListener('submit', function (e) {
+          e.preventDefault();
+          postMessage();
+        });
+        async function postMessage() {
+        const typeInput = document.getElementById('type');
+        const name = document.getElementById(
+          'name').value;
+        const type = document.getElementById(
+          'type').value;
+          const attack = document.getElementById(
+          'attack').value;
+          if (typeInput === "water" || "fire" || "rock"){
+          fetch(
+            'https://ancient-fish-67.webhook.cool', {
+            method: 'POST',
+            headers: {
+              'Content-Type':
+                'application/json'
+            },
+            body: JSON.stringify(
+              { name, type, attack })
+          });
+        }
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

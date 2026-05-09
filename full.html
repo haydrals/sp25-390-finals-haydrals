@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>full</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <fieldset>
+        <form>
+            <h3><br>What is your name.</h3>
+            <label id="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </form>
+
+        <form>
+            <h3><br>What is your email?</h3>
+            <label id="email">email:</label>
+            <input type="email" id="email" name="email" required>
+        </form>
+
+        <form>
+            <h3><br>What is your message?</h3>
+            <label id="message">Message:</label>
+            <input type="textarea" id="message" name="message" required>
+        </form>
+
+        <form>
+            <button type="submit" id="submit">Submit</button>
+        </form>
+    </fieldset>
+    <script>
+        document.getElementById('submit').addEventListener('submit', function (e) {
+          e.preventDefault();
+          postMessage();
+        });
+        async function postMessage() {
+        const name = document.getElementById(
+          'name').value;
+        const email = document.getElementById(
+          'email').value;
+          const message = document.getElementById(
+          'message').value;
+        fetch(
+            '/users', {
+            method: 'POST',
+            headers: {
+              'Content-Type':
+                'application/json'
+            },
+            body: JSON.stringify(
+              { name, email, message })
+          });
+        }
+    </script>
+</body>
+</html>
